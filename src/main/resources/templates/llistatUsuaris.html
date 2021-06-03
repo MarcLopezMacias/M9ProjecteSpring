@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LLISTAT USUARIS</title>
+</head>
+
+<body>
+
+<h1 th:text="LLISTAT USUARIS">LLISTAT USUARIS</h1>
+
+<table>
+
+    <thead>
+    <tr>
+        <th>USUARI</th>
+        <th>CONTRASSENYA</th>
+        <th>ROL</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="Usuaris : ${llistatUsuaris}">
+        <td th:text="${Usuaris.username}">USUARI</td>
+        <td th:text="${Usuaris.password}">CONTRASSENYA</td>
+        <td th:text="${Usuaris.rol}">ROL</td>
+    </tr>
+    </tbody>
+
+</table>
+
+<br><br><br><br>
+
+<form method="post" th:action="@{/logout}">
+    <input type="submit" value="Sortir"/>
+</form>
+
+</body>
+</html>
