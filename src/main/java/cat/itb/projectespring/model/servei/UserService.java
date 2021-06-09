@@ -30,12 +30,11 @@ public class UserService {
     public void init() {
         repositori.addAll(
                 Arrays.asList(
-                        new Usuari(USER, passwordEncoder(USER), PASSWORD),
-                        new Usuari("notAdmin", passwordEncoder("notAdmin"), PASSWORD),
+                        new Usuari(USER, passwordEncoder(PASSWORD), PASSWORD),
+                        new Usuari("notAdmin", passwordEncoder(PASSWORD), PASSWORD),
                         new Usuari(ADMIN, passwordEncoder(ADMIN), ADMIN, ADMIN)
                 ));
     }
-
 
     public Usuari consultarPerId(String id) {
         Usuari u = null;
@@ -49,8 +48,10 @@ public class UserService {
         return u;
     }
 
-
     public String passwordEncoder(String s) {
         return new BCryptPasswordEncoder().encode(s);
     }
+
+
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -8,9 +8,17 @@
 
 <body>
 
-Oops!
-El link introduït no és correcte.
-O bé no disposes del rol per consultar aquesta pàgina.
+Error 404: Oops!
+<br>
+O bé el link introduït no és correcte, <br>
+o bé no disposes del rol per consultar aquesta pàgina, <br>
+o bé no has introduit les dades correctament durant el registre (contrassenyes iguals). <br>
+
+<br><br><br><br>
+
+<form method="get" th:action="@{/home}">
+    <input type="submit" value="Home"/>
+</form>
 
 </body>
 </html>

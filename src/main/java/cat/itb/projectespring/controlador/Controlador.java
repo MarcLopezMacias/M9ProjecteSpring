@@ -23,45 +23,40 @@ public class Controlador {
 
     @GetMapping("/")
     public String inici(Model model) {
-        model.addAttribute(LLISTAT_PATINETS, patinetService.llistatPatinets());
-        model.addAttribute(PATINET, new Patinet());
         return "home";
     }
 
-    @GetMapping("/list")
-    public String iniciRegistre(Model model) {
-        model.addAttribute(LLISTAT_PATINETS, patinetService.llistatPatinets());
-        model.addAttribute(PATINET, new Patinet());
+    @GetMapping("/home")
+    public String home(Model model) {
         return "home";
     }
 
-    @RequestMapping(value = "/delete/{name}", method = RequestMethod.POST)
-    public String eliminarPatinetPerNom(@PathVariable("name") String nom) {
-        patinetService.eliminarPerNom(nom);
-        return "redirect:/";
+    @PostMapping("/registration")
+    public String afegirUsuari(@ModelAttribute("usuari") Usuari usuari) {
+        usuari.setRol(USER);
+        if (usuari.getPassword().equals(usuari.getMatchingPassword())) {
+            userService.afegir(usuari);
+            return "redirect:/" + LLISTAT_PATINETS;
+        } else {
+            return "redirect:/error";
+        }
     }
 
-    @GetMapping("/userList")
+    @GetMapping("/" + LLISTAT_PATINETS)
+    public String llistatPatinets(Model model) {
+        model.addAttribute(LLISTAT_PATINETS, patinetService.llistatPatinets());
+        model.addAttribute(PATINET, new Patinet());
+        return LLISTAT_PATINETS;
+    }
+
+    @GetMapping("/" + LLISTAT_USUARIS)
     public String llistatUsuaris(Model model) {
         model.addAttribute(LLISTAT_USUARIS, userService.llistatUsuaris());
         return LLISTAT_USUARIS;
     }
 
-    @GetMapping("/home")
-    public String llistatPatinets(Model model) {
-        model.addAttribute(LLISTAT_PATINETS, patinetService.llistatPatinets());
-        model.addAttribute(PATINET, new Patinet());
-        return "home";
-    }
-
-    @GetMapping("/registration")
-    public String mostrarFormulariRegistre(WebRequest request, Model model) {
-        model.addAttribute("usuari", new Usuari());
-        return "registre";
-    }
-
     @RequestMapping("/afegir")
-    public String afegirPatinet(Model model) {
+    public String afegir(Model model) {
         model.addAttribute(PATINET, new Patinet());
         return "afegirPatinet";
     }
@@ -69,14 +64,13 @@ public class Controlador {
     @PostMapping("/afegirPatinet")
     public String afegirPatinet(@ModelAttribute(PATINET) Patinet patinet) {
         patinetService.afegir(patinet);
-        return "redirect:/";
+        return "redirect:/" + LLISTAT_PATINETS;
     }
 
-    @PostMapping("/registration")
-    public String afegirUsuari(@ModelAttribute("usuari") Usuari usuari) {
-        usuari.setRol(USER);
-        userService.afegir(usuari);
-        return "redirect:/list";
+    @GetMapping("/registration")
+    public String mostrarFormulariRegistre(WebRequest request, Model model) {
+        model.addAttribute("usuari", new Usuari());
+        return "registre";
     }
 
     @RequestMapping(value = "/update/{name}", method = RequestMethod.POST)
@@ -89,10 +83,15 @@ public class Controlador {
     @PostMapping("/actualitzarPatinet")
     public String actualitzarPatinetPost(@ModelAttribute(PATINET) Patinet patinet) {
         patinetService.actualitzarPatinet(patinet, nom);
-        return "redirect:/";
+        return "redirect:/" + LLISTAT_PATINETS;
 
     }
 
+    @RequestMapping(value = "/delete/{name}", method = RequestMethod.POST)
+    public String eliminarPatinetPerNom(@PathVariable("name") String nom) {
+        patinetService.eliminarPerNom(nom);
+        return "redirect:/" + LLISTAT_PATINETS;
+    }
 
 }
 

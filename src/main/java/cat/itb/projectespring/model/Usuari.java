@@ -7,23 +7,28 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import static cat.itb.projectespring.Constants.USER;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuari {
+
     @NotNull
     @NotEmpty
     private String username;
+
     @NotNull
     @NotEmpty
     private String password;
+
     @NotNull
     @NotEmpty
     private String matchingPassword;
+
     @NotNull
     @NotEmpty
     private String rol;
-
 
     public Usuari(String name, String password, String matchingPassword) {
         this.username = name;
