@@ -81,7 +81,7 @@ public class Controlador {
     }
 
     @PostMapping("/actualitzarPatinet")
-    public String actualitzarPatinetPost(@ModelAttribute(PATINET) Patinet patinet) {
+    public String actualitzarPatinet(@ModelAttribute(PATINET) Patinet patinet) {
         patinetService.actualitzarPatinet(patinet, nom);
         return "redirect:/" + LLISTAT_PATINETS;
 
