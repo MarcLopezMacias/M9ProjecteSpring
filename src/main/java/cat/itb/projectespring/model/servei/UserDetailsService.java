@@ -1,6 +1,6 @@
 package cat.itb.projectespring.model.servei;
 
-import cat.itb.projectespring.model.Usuari;
+import cat.itb.projectespring.model.entitat.Usuari;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +15,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Usuari u = serveiUsuaris.consultarPerId(s);
+        Usuari u = serveiUsuaris.findById(s);
         User.UserBuilder builder = null;
         if (u != null) {
             builder = User.withUsername(s);

@@ -1,7 +1,8 @@
 package cat.itb.projectespring.controlador;
 
-import cat.itb.projectespring.model.Patinet;
-import cat.itb.projectespring.model.Usuari;
+import cat.itb.projectespring.model.entitat.Patinet;
+import cat.itb.projectespring.model.entitat.Usuari;
+import cat.itb.projectespring.model.repositori.UserRepo;
 import cat.itb.projectespring.model.servei.PatinetService;
 import cat.itb.projectespring.model.servei.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,12 @@ import static cat.itb.projectespring.Constants.*;
 
 @Controller
 public class Controlador {
+
+    public static UserRepo userRepo;
+
+    public Controlador(UserRepo repo) {
+        this.userRepo = repo;
+    }
 
     String nom;
     @Autowired

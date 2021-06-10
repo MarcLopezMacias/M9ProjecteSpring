@@ -1,4 +1,4 @@
-package cat.itb.projectespring.model;
+package cat.itb.projectespring.model.entitat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

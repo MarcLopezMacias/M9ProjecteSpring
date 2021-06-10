@@ -1,6 +1,6 @@
 package cat.itb.projectespring.model.servei;
 
-import cat.itb.projectespring.model.Patinet;
+import cat.itb.projectespring.model.entitat.Patinet;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
